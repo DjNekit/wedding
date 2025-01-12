@@ -1,0 +1,41 @@
+.wrapper {
+    position: relative;
+}
+
+.shadow {
+    position: absolute;
+    left: 40px;
+    opacity: .2;
+    color: var(--gold);
+    font-size: clamp(2rem, 12vw, 8rem);
+    z-index: -1;
+    top: 40px;
+    white-space: nowrap;
+}
+
+.h1 {
+    white-space: nowrap;
+    font-size: clamp(1rem, 8vw, 6rem);
+    padding-bottom: 80px;
+}
+
+.p {
+    position: relative;
+    margin: 40px 0;
+    width: 70%;
+}
+
+.date {
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 15px 0;
+    font-size: clamp(1rem, 6vw, 3rem);
+    display: grid;
+    justify-content: center;
+}
+
+.love {
+    position: absolute;
+    top: -28px;
+}

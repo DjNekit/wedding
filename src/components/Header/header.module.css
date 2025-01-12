@@ -1,0 +1,27 @@
+.wrapper {
+    display: grid;
+    grid-template-rows: 50vh 50vh;
+}
+
+.us {
+    background-color: var(--red);
+    display: grid;
+    /* gap: 1vw; */
+    justify-content: center;
+    padding: 40px 10px;
+}
+
+.date {
+    font-size: clamp(2rem, 6vw, 3rem);
+    text-align: center;
+}
+
+.invitation {
+    color: var(--gold);
+    font-size: clamp(1.5rem, 6vw, 3rem);
+    text-align: center;
+}
+
+.h1 {
+    text-align: center;
+}
