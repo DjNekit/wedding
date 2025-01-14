@@ -9,20 +9,29 @@
     color: var(--gold);
     font-size: clamp(2rem, 12vw, 8rem);
     z-index: -1;
-    top: 40px;
+    top: -40px;
     white-space: nowrap;
 }
 
 .h1 {
     white-space: nowrap;
     font-size: clamp(1rem, 8vw, 6rem);
-    padding-bottom: 80px;
+    margin-bottom: 80px;
 }
 
 .p {
     position: relative;
     margin: 40px 0;
     width: 70%;
+}
+
+.love {
+    position: absolute;
+    top: -28px;
+}
+
+.last {
+    margin-bottom: 0;
 }
 
 .date {
@@ -35,7 +44,3 @@
     justify-content: center;
 }
 
-.love {
-    position: absolute;
-    top: -28px;
-}

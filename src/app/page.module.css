@@ -2,3 +2,14 @@
   min-height: 100svh;
   
 }
+
+.p {
+  position: relative;
+  margin: 40px 0;
+  text-align: end;
+}
+
+.love {
+  position: absolute;
+  top: -28px;
+}

@@ -17,7 +17,6 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-cormorant_infant);
   font-size: clamp(1rem, 2vw, 3rem);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,6 +26,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: var(--font-cormorant_infant);
 }
 
 a {
@@ -35,7 +35,7 @@ a {
 }
 
 section {
-  padding: 90px 0;
+  margin: 90px 0;
   display: flex;
   justify-content: center;
 }

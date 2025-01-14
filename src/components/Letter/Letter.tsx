@@ -30,17 +30,6 @@ export const Letter: FC<LetterProps> = memo(() => {
                         <Counter targetDate="2025-02-21T00:00:00" />
                     </div>
                 </div>
-                <p className={s.p}>
-                    <span className={s.love}>
-                        <Image 
-                            src='/love.svg' 
-                            width={60}
-                            height={16}
-                            alt='love'
-                        />
-                    </span>
-                    С любовью, Наташа и Никита
-                </p>
             </div>
         </section>
     );

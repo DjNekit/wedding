@@ -1,0 +1,17 @@
+.wrap {
+    margin-top: 20px;
+    display: grid;
+    gap: 20px;
+}
+
+.plan {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: clamp(1rem, 3vw, 2rem);
+}
+
+.arrow {
+    text-align: center;
+    /* transform: rotate(90deg); */
+}
