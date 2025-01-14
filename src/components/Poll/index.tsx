@@ -7,6 +7,8 @@ export const Poll: FC = memo(() => {
     const [guests, setGuests] = useState<string[]>(['']);
     const [alco, setAlco] = useState<string | null>(null);
     const [isRegistration, setIsRegistration] = useState<boolean | null>(null);
+    const [message, setMessage] = useState<string>('');
+    const [error, setError] = useState('');
 
     const onGuestAdd = () => {
         setGuests(prev => [...prev, ''])
@@ -32,8 +34,31 @@ export const Poll: FC = memo(() => {
         setIsRegistration(agree);
     }
 
-    const onSubmit = (form: any) => {
-        console.log(form);
+    const onSubmit = async () => {
+        setError('');
+        try {
+            const response = await fetch('/api/send-to-telegram', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                guests,
+                alco,
+                isRegistration,
+                message,
+              }),
+            });
+      
+            const result = await response.json();
+      
+            if (result.success) {
+            //   setStatus('Сообщение успешно отправлено!');
+            } else {
+              setError(result.error);
+            }
+          } catch (error) {
+            console.error(error);
+            // setStatus('Произошла ошибка. Попробуйте позже.');
+          }
         
     };
     return (
@@ -146,7 +171,7 @@ export const Poll: FC = memo(() => {
                                 name='3'
                                 rows={5}
                                 className={s.nameInput} 
-                                onChange={() => onRegisterChange(true)}
+                                onChange={(event) => setMessage(event.target.value)}
                                 placeholder='Если у вас есть пожелания, или вы просто хотите поздравить нас, можете написать сюда'
                             />
                         </div>
@@ -154,13 +179,17 @@ export const Poll: FC = memo(() => {
                 </div>
                 <div>
                     <button 
-                        type='submit' 
                         className={s.button} 
-                        onSubmit={onSubmit}
+                        onClick={onSubmit}
                     >
                         Отправить нам
                     </button>
                 </div>
+                {error &&
+                    <div className={s.error}>
+                        {error}
+                    </div>
+                }
             </div>
         </section>
     );
