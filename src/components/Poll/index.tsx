@@ -8,11 +8,12 @@ export const Poll: FC = memo(() => {
     const [alco, setAlco] = useState<string | null>(null);
     const [isRegistration, setIsRegistration] = useState<boolean | null>(null);
     const [message, setMessage] = useState<string>('');
+    const [ok, setOk] = useState(false);
     const [error, setError] = useState('');
 
     const onGuestAdd = () => {
         setGuests(prev => [...prev, ''])
-        
+
     }
     const onGuestDelete = () => {
         setGuests(prev => prev.slice(0, -1))
@@ -35,31 +36,36 @@ export const Poll: FC = memo(() => {
     }
 
     const onSubmit = async () => {
+        if (ok) {
+            return;
+        }
         setError('');
         try {
             const response = await fetch('/api/send-to-telegram', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                guests,
-                alco,
-                isRegistration,
-                message,
-              }),
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    guests,
+                    alco,
+                    isRegistration,
+                    message,
+                }),
             });
-      
+
             const result = await response.json();
-      
+
             if (result.success) {
-            //   setStatus('Сообщение успешно отправлено!');
+                setOk(true);
             } else {
-              setError(result.error);
+                setOk(false);
+                setError(result.error);
             }
-          } catch (error) {
+        } catch (error) {
+            setOk(false);
             console.error(error);
             // setStatus('Произошла ошибка. Попробуйте позже.');
-          }
-        
+        }
+
     };
     return (
         <section>
@@ -67,11 +73,11 @@ export const Poll: FC = memo(() => {
                 <div>
                     <div>Заполните анкету:</div>
                     <div className={s.paddingLeft}>
-                        {guests.map((guest, index) => 
+                        {guests.map((guest, index) =>
                             <div key={index} className={s.option}>
-                                <input 
-                                    className={s.nameInput} 
-                                    placeholder='Введите имя гостя' 
+                                <input
+                                    className={s.nameInput}
+                                    placeholder='Введите имя гостя'
                                     value={guest}
                                     onChange={(event) => onInputChange(event.target.value, index)}
                                 />
@@ -87,50 +93,50 @@ export const Poll: FC = memo(() => {
                     <div>Какой алкоголь вы предпочитаете?</div>
                     <div className={s.block}>
                         <div className={s.option}>
-                            <input 
-                                type="radio" 
-                                name='1' 
-                                className={s.input} 
-                                checked={alco === 'Красное вино'} 
+                            <input
+                                type="radio"
+                                name='1'
+                                className={s.input}
+                                checked={alco === 'Красное вино'}
                                 onChange={() => onAlcoChange('Красное вино')}
                             />
                             <div>Красное вино</div>
                         </div>
                         <div className={s.option}>
-                            <input 
-                                type="radio" 
-                                name='1' 
-                                className={s.input} 
+                            <input
+                                type="radio"
+                                name='1'
+                                className={s.input}
                                 checked={alco === 'Белое вино'}
                                 onChange={() => onAlcoChange('Белое вино')}
                             />
                             <div>Белое вино</div>
                         </div>
                         <div className={s.option}>
-                            <input 
-                                type="radio" 
-                                name='1' 
-                                className={s.input} 
+                            <input
+                                type="radio"
+                                name='1'
+                                className={s.input}
                                 checked={alco === 'Шампанское'}
                                 onChange={() => onAlcoChange('Шампанское')}
                             />
                             <div>Шампанское</div>
                         </div>
                         <div className={s.option}>
-                            <input 
-                                type="radio" 
-                                name='1' 
-                                className={s.input} 
+                            <input
+                                type="radio"
+                                name='1'
+                                className={s.input}
                                 checked={alco === 'Виски / Коньяк'}
                                 onChange={() => onAlcoChange('Виски / Коньяк')}
                             />
                             <div>Виски / Коньяк</div>
                         </div>
                         <label className={s.option}>
-                            <input 
-                                type="radio" 
-                                name='1' 
-                                className={s.input} 
+                            <input
+                                type="radio"
+                                name='1'
+                                className={s.input}
                                 checked={alco === 'Не буду пить алкоголь'}
                                 onChange={() => onAlcoChange('Не буду пить алкоголь')}
                             />
@@ -142,21 +148,21 @@ export const Poll: FC = memo(() => {
                     <div>Планируете ли вы присутствовать на росписи?</div>
                     <div className={s.block}>
                         <div className={s.option}>
-                            <input 
-                                type="radio" 
-                                name='2' 
-                                className={s.input} 
-                                checked={!!isRegistration} 
+                            <input
+                                type="radio"
+                                name='2'
+                                className={s.input}
+                                checked={!!isRegistration}
                                 onChange={() => onRegisterChange(true)}
                             />
                             <div>Да, буду и в ЗАГСе, и на фуршете.</div>
                         </div>
                         <label className={s.option}>
-                            <input 
-                                type="radio" 
-                                name='2' 
-                                className={s.input} 
-                                checked={isRegistration === false} 
+                            <input
+                                type="radio"
+                                name='2'
+                                className={s.input}
+                                checked={isRegistration === false}
                                 onChange={() => onRegisterChange(false)}
                             />
                             <div>Нет, присоединюсь только на фуршете.</div>
@@ -167,10 +173,10 @@ export const Poll: FC = memo(() => {
                     <div>Можете указать ваши пожелания:</div>
                     <div className={s.paddingLeft}>
                         <div className={s.option}>
-                            <textarea 
+                            <textarea
                                 name='3'
                                 rows={5}
-                                className={s.nameInput} 
+                                className={s.nameInput}
                                 onChange={(event) => setMessage(event.target.value)}
                                 placeholder='Если у вас есть пожелания, или вы просто хотите поздравить нас, можете написать сюда'
                             />
@@ -178,18 +184,16 @@ export const Poll: FC = memo(() => {
                     </div>
                 </div>
                 <div>
-                    <button 
-                        className={s.button} 
+                    <button
+                        className={`${s.button} ${ok && s.success}`}
                         onClick={onSubmit}
                     >
-                        Отправить нам
+                        {ok ? 'Мы получили ваше сообщение :)' : 'Отправить нам'}
                     </button>
                 </div>
-                {error &&
-                    <div className={s.error}>
-                        {error}
-                    </div>
-                }
+                <div className={s.error}>
+                    {error}
+                </div>
             </div>
         </section>
     );

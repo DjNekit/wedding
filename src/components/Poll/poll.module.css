@@ -16,6 +16,16 @@
     box-shadow: 0px 0px 22px 8px rgba(255, 157, 0, 0.38);
 }
 
+.success {
+    /* color: green; */
+    cursor: default;
+    background-color: rgb(252, 242, 242);
+}
+
+.button.success:hover {
+    box-shadow: none;
+}
+
 .option {
      
     display: flex;
@@ -75,5 +85,10 @@
 }
 
 .error {
-    color: red
+    color: red;
+    height: 24px;
+}
+
+.ok {
+    color: green;
 }
