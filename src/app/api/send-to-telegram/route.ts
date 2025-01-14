@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   const TELEGRAM_BOT_TOKEN = '7720444493:AAGts5uA38i5zJLHhJLM0I3UtgGgY7PHTJY'; // Ваш токен
-  const TELEGRAM_CHAT_ID = '711862373'; // Ваш chat_id
+  const TELEGRAM_CHAT_ID = ['711862373', '363014985']; // Ваш chat_id
 
   try {
     // Получаем данные из формы
@@ -16,30 +16,45 @@ export async function POST(request: Request) {
 
     // Формируем текст сообщения
     const text = `
-      Новое сообщение с сайта:
-      ${guests}
-      Предпочитаемый алкоголь: ${alco}
-      Присутствие на регистрации: ${isRegistration}
-      Пожелание: ${message}
+    Новое сообщение с сайта:
+    ${guests}
+    Предпочитаемый алкоголь: ${alco}
+    Присутствие на регистрации: ${isRegistration ? 'Да' : 'Нет'}
+    Пожелание: ${message}
     `;
 
-    // Отправляем сообщение в Telegram
-    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: TELEGRAM_CHAT_ID,
-        text,
-      }),
-    });
+    // Отправляем сообщение каждому получателю
+    await Promise.all(
+        TELEGRAM_CHAT_ID.map(async (chat_id) => {
+          const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id,
+              text,
+            }),
+          });
+  
+          const data = await response.json();
+  
+          if (!data.ok) {
+            throw new Error(`Не удалось отправить сообщение в chat_id: ${chat_id}`);
+          }
+  
+          return data;
+        })
+      );
 
-    const data = await response.json();
-    console.log(data);
+    // // Отправляем сообщение в Telegram
+    // const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     chat_id: TELEGRAM_CHAT_ID,
+    //     text,
+    //   }),
+    // });
     
-    if (!data.ok) {
-      return NextResponse.json({ error: 'Не удалось отправить сообщение в Telegram' }, { status: 200 });
-    }
-
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error(error);
