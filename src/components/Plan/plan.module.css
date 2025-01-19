@@ -6,7 +6,7 @@
 
 .plan {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
     font-size: clamp(1rem, 3vw, 2rem);
 }

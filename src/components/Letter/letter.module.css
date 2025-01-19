@@ -22,7 +22,6 @@
 .p {
     position: relative;
     margin: 40px 0;
-    width: 70%;
 }
 
 .love {
@@ -43,4 +42,13 @@
     display: grid;
     justify-content: center;
 }
+
+.letter {
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0px 0px 8px 4px rgba(34, 60, 80, 0.09);
+    border-radius: 6px;
+}
+
+
 

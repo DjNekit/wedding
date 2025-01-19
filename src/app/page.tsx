@@ -23,7 +23,7 @@ export default function Home() {
                 alt='love'
               />
             </span>
-            С любовью, Наташа и Никита
+            С любовью, Никита и Наташа
           </p>
         </div>
       </section>

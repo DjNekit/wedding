@@ -27,7 +27,12 @@ export const Plan: FC = memo(() => {
                     <div className={s.plan}>
                         <div className={s.time}>16:00</div>
                         <div>
-                            Фуршет: Банкетный зал "Камелот"
+                            <div>
+                                Банкет: Ресторан "Камелот"
+                            </div>
+                            <div>
+                                бульвар Победы, 5
+                            </div>
                         </div>
                     </div>
                     <div></div>

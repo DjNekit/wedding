@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     // Получаем данные из формы
     const body = await request.json();
 
-    const { guests, alco, isRegistration, message } = body;
+    const { guests, alco, presence, message } = body;
 
     if (guests.every((guest: any) => !!guest === false)) {
         return NextResponse.json({ error: 'Не указаны гости' }, { status: 200 });
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     Новое сообщение с сайта:
     ${guests}
     Предпочитаемый алкоголь: ${alco}
-    Присутствие на регистрации: ${isRegistration ? 'Да' : 'Нет'}
+    Присутствие на регистрации: ${presence}
     Пожелание: ${message}
     `;
 
@@ -44,17 +44,6 @@ export async function POST(request: Request) {
           return data;
         })
       );
-
-    // // Отправляем сообщение в Telegram
-    // const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     chat_id: TELEGRAM_CHAT_ID,
-    //     text,
-    //   }),
-    // });
-    
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error(error);

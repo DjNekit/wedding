@@ -1,12 +1,13 @@
 'use client'
 
 import React, { FC, memo, useState } from 'react';
+import Image from 'next/image';
 import s from './poll.module.css';
 
 export const Poll: FC = memo(() => {
     const [guests, setGuests] = useState<string[]>(['']);
     const [alco, setAlco] = useState<string | null>(null);
-    const [isRegistration, setIsRegistration] = useState<boolean | null>(null);
+    const [presence, setPresence] = useState<string>('');
     const [message, setMessage] = useState<string>('');
     const [ok, setOk] = useState(false);
     const [error, setError] = useState('');
@@ -31,8 +32,8 @@ export const Poll: FC = memo(() => {
         setAlco(alco);
     }
 
-    const onRegisterChange = (agree: boolean) => {
-        setIsRegistration(agree);
+    const onRegisterChange = (presence: string) => {
+        setPresence(presence);
     }
 
     const onSubmit = async () => {
@@ -47,7 +48,7 @@ export const Poll: FC = memo(() => {
                 body: JSON.stringify({
                     guests,
                     alco,
-                    isRegistration,
+                    presence,
                     message,
                 }),
             });
@@ -152,20 +153,30 @@ export const Poll: FC = memo(() => {
                                 type="radio"
                                 name='2'
                                 className={s.input}
-                                checked={!!isRegistration}
-                                onChange={() => onRegisterChange(true)}
+                                checked={presence === 'Да, буду и в ЗАГСе, и на банкете.'}
+                                onChange={() => onRegisterChange('Да, буду и в ЗАГСе, и на банкете.')}
                             />
-                            <div>Да, буду и в ЗАГСе, и на фуршете.</div>
+                            <div>Да, буду и в ЗАГСе, и на банкете.</div>
                         </div>
                         <label className={s.option}>
                             <input
                                 type="radio"
                                 name='2'
                                 className={s.input}
-                                checked={isRegistration === false}
-                                onChange={() => onRegisterChange(false)}
+                                checked={presence === 'Нет, присоединюсь только на банкете.'}
+                                onChange={() => onRegisterChange('Нет, присоединюсь только на банкете.')}
                             />
-                            <div>Нет, присоединюсь только на фуршете.</div>
+                            <div>Нет, присоединюсь только на банкете.</div>
+                        </label>
+                        <label className={s.option}>
+                            <input
+                                type="radio"
+                                name='2'
+                                className={s.input}
+                                checked={presence === 'Не смогу прийти'}
+                                onChange={() => onRegisterChange('Не смогу прийти')}
+                            />
+                            <div>Не смогу прийти</div>
                         </label>
                     </div>
                 </div>
