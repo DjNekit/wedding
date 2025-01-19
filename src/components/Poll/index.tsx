@@ -146,14 +146,14 @@ export const Poll: FC = memo(() => {
                     </div>
                 </div>
                 <div>
-                    <div>Планируете ли вы присутствовать на росписи?</div>
+                    <div>Планируете ли вы присутствовать на свадьбе?</div>
                     <div className={s.block}>
                         <div className={s.option}>
                             <input
                                 type="radio"
                                 name='2'
                                 className={s.input}
-                                checked={presence === 'Да, буду и в ЗАГСе, и на банкете.'}
+                                checked={presence === 'Буду и в ЗАГСе, и на банкете.'}
                                 onChange={() => onRegisterChange('Да, буду и в ЗАГСе, и на банкете.')}
                             />
                             <div>Да, буду и в ЗАГСе, и на банкете.</div>
@@ -163,7 +163,7 @@ export const Poll: FC = memo(() => {
                                 type="radio"
                                 name='2'
                                 className={s.input}
-                                checked={presence === 'Нет, присоединюсь только на банкете.'}
+                                checked={presence === 'Присоединюсь только на банкете.'}
                                 onChange={() => onRegisterChange('Нет, присоединюсь только на банкете.')}
                             />
                             <div>Нет, присоединюсь только на банкете.</div>
