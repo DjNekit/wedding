@@ -154,9 +154,9 @@ export const Poll: FC = memo(() => {
                                 name='2'
                                 className={s.input}
                                 checked={presence === 'Буду и в ЗАГСе, и на банкете.'}
-                                onChange={() => onRegisterChange('Да, буду и в ЗАГСе, и на банкете.')}
+                                onChange={() => onRegisterChange('Буду и в ЗАГСе, и на банкете.')}
                             />
-                            <div>Да, буду и в ЗАГСе, и на банкете.</div>
+                            <div>Буду и в ЗАГСе, и на банкете.</div>
                         </div>
                         <label className={s.option}>
                             <input
@@ -164,9 +164,9 @@ export const Poll: FC = memo(() => {
                                 name='2'
                                 className={s.input}
                                 checked={presence === 'Присоединюсь только на банкете.'}
-                                onChange={() => onRegisterChange('Нет, присоединюсь только на банкете.')}
+                                onChange={() => onRegisterChange('Присоединюсь только на банкете.')}
                             />
-                            <div>Нет, присоединюсь только на банкете.</div>
+                            <div>Присоединюсь только на банкете.</div>
                         </label>
                         <label className={s.option}>
                             <input
