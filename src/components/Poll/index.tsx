@@ -158,6 +158,16 @@ export const Poll: FC = memo(() => {
                             />
                             <div>Буду и в ЗАГСе, и на банкете.</div>
                         </div>
+                        <div className={s.option}>
+                            <input
+                                type="radio"
+                                name='2'
+                                className={s.input}
+                                checked={presence === 'Буду только в ЗАГСе.'}
+                                onChange={() => onRegisterChange('Буду только в ЗАГСе.')}
+                            />
+                            <div>Буду только в ЗАГСе.</div>
+                        </div>
                         <label className={s.option}>
                             <input
                                 type="radio"
@@ -189,7 +199,7 @@ export const Poll: FC = memo(() => {
                                 rows={5}
                                 className={s.nameInput}
                                 onChange={(event) => setMessage(event.target.value)}
-                                placeholder='Если у вас есть пожелания, или вы просто хотите поздравить нас, можете написать сюда'
+                                placeholder='Если у вас есть пожелания, укажите их здесь'
                             />
                         </div>
                     </div>

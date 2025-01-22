@@ -25,17 +25,16 @@ export const Plan: FC = memo(() => {
                         />
                     </div>
                     <div className={s.plan}>
-                        <div className={s.time}>16:00</div>
+                        <div className={s.time}>15:30</div>
                         <div>
                             <div>
-                                Банкет: Ресторан "Камелот"
+                                Начало банкета: Ресторан "Камелот", этаж 2
                             </div>
                             <div>
                                 бульвар Победы, 5
                             </div>
                         </div>
                     </div>
-                    <div></div>
                 </form>
             </div>
         </section>
