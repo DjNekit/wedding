@@ -78,7 +78,7 @@ export const Poll: FC = memo(() => {
                             <div key={index} className={s.option}>
                                 <input
                                     className={s.nameInput}
-                                    placeholder='Введите имя гостя'
+                                    placeholder='Введите имя и фамилию гостя'
                                     value={guest}
                                     onChange={(event) => onInputChange(event.target.value, index)}
                                 />
